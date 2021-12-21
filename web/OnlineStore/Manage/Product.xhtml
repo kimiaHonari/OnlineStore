@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
+<h:head>
+    <title>Management</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="bootstrap-theme.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="font-awesome.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="bootstrap-social.css"></h:outputStylesheet>
+
+    <h:outputScript library="javascript" name="jquery-3.1.0.min.js"></h:outputScript>
+    <h:outputScript library="javascript" name="bootstrap.min.js"></h:outputScript>
+    <h:outputStylesheet library="css"   name="mystyles.css"></h:outputStylesheet>
+
+
+</h:head>
+<h:body>
+    <h:form>
+        <div class="navbar navbar-default navbar-fixed-top" >
+            <div class="container">
+                <div class="navbar-header">
+                    <h:button type="button" class="navbar-toggle" data-toggle="collapse"
+                              data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span>
+                    </h:button>
+                    <a class="navbar-brand" href="#">Management</a>
+                </div>
+                <div class="collapse navbar-collapse">
+
+                    <ul class="nav navbar-nav">
+                        <li ><a href="/OnlineStore/Home.xhtml">Online shopping</a></li>
+                        <li class="active"><a href="#">Product</a></li>
+                        <li ><a href="/OnlineStore/Manage/Category.xhtml">Category</a></li>
+                        <li ><a href="/OnlineStore/Manage/Brand.xhtml">Brand</a></li>
+                        <li ><a href="/OnlineStore/Manage/Repository.xhtml">Repository</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+
+                        <li>
+                            <h:commandLink value="Logout" action="#{LoginManageBean.logout}"   rendered="#{LoginManageBean.loggedIn}">
+                            </h:commandLink>
+                        </li>
+
+                    </ul>
+
+
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </h:form>
+    <div id="main-content" class="container">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+        <h:form id="messages">
+            <p:messages id="m1" showDetail="true" autoUpdate="true" closable="true" />
+        </h:form>
+    <div class="row">
+    <div class="col-md-5 ">
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2 style="color: green;" class="col-sm-offset-3">Add Product</h2></div>
+        <div class="panel-body">
+
+
+            <div style="padding: 5px;">
+        <h:form id="AddProduct-form"   role="form" style="display: block;" styleClass="form-horizontal " enctype="multipart/form-data" >
+            <div class="form-group">
+                <label>Product ID :</label>
+                <p:inputText styleClass="form-control" id="id" value="#{AddProduct.id}"  required="true" requiredMessage="Please enter Product's id">
+
+                </p:inputText>
+                <h:message for="id" style="color:red" />
+            </div>
+            <div class="form-group">
+                <label>Name :</label>
+                <p:inputText styleClass="form-control" id="name" value="#{AddProduct.name}"  required="true" requiredMessage="Please enter Product's name">
+
+                </p:inputText>
+                <h:message for="name" style="color:red" />
+            </div>
+            <div class="form-group">
+                <label>Price :</label>
+                <p:inputText styleClass="form-control" id="price" value="#{AddProduct.price}"  required="true" requiredMessage="Please enter Product's price">
+
+                </p:inputText>
+                <h:message for="price" style="color:red" />
+            </div>
+            <div class="form-group">
+                <label>Stock :</label>
+                <p:inputText styleClass="form-control" id="stock" value="#{AddProduct.stock}"  required="true" requiredMessage="Please enter Product's stock">
+
+                </p:inputText>
+                <h:message for="stock" style="color:red" />
+            </div>
+            <div class="form-group">
+
+                <p:outputLabel for="category" value="Category: " />
+                <h:selectOneMenu id="category" value="#{AddProduct.categorySelection}" effect="fold" editable="true">
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItems value="#{AddProduct.categories}" />
+                </h:selectOneMenu>
+
+            </div>
+            <div class="form-group">
+
+                <p:outputLabel for="brand" value="Brand: " />
+                <h:selectOneMenu id="brand" value="#{AddProduct.brandSelection}" effect="fold" editable="true">
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItems value="#{AddProduct.brands}" />
+                </h:selectOneMenu>
+
+            </div>
+            <div class="form-group">
+                <label>Description :</label>
+                <p:inputTextarea rows="6" cols="33"  styleClass="form-control" id="desc" value="#{AddProduct.description}"  required="true" requiredMessage="Please enter Product's Description">
+
+                </p:inputTextarea>
+                <h:message for="desc" style="color:red" />
+            </div>
+            <div class="form-group">
+                <label>off percent :</label>
+                <p:inputText styleClass="form-control" id="off" value="#{AddProduct.off}"  required="true" requiredMessage="Please enter Product's off percent">
+
+                </p:inputText>
+                <h:message for="off" style="color:red" />
+            </div>
+
+            <div class="form-group">
+                <label>Image :</label>
+                <h:inputFile value="#{AddProduct.imageUpload}">
+                </h:inputFile>
+
+            </div>
+            <div class="form-group">
+                <label>Color :</label>
+                <p:inputText styleClass="form-control" id="color" value="#{AddProduct.color}"  required="true" requiredMessage="Please enter Product's color">
+
+                </p:inputText>
+                <h:message for="color" style="color:red" />
+            </div>
+            <div class="form-group">
+                <label>State :</label>
+                <p:inputText styleClass="form-control" id="state" value="#{AddProduct.state}"  required="true" requiredMessage="Please enter Product's state">
+
+                </p:inputText>
+                <h:message for="state" style="color:red" />
+            </div>
+            <div class="col-sm-6 col-sm-offset-5">
+            <h:commandButton styleClass="btn btn-success" value="submit" action="#{AddProduct.AddProducts}"
+                             >
+                <f:ajax execute="AddProduct-form" render="AddProduct-form"></f:ajax>
+            </h:commandButton>
+            </div>
+        </h:form>
+                </div>
+            </div>
+        </div>
+        </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-5 ">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h2 style="color: blue;" class="col-sm-offset-5">Edit Product</h2></div>
+            <div class="panel-body">
+
+
+        <div style="padding: 7px; ">
+            <h:form id="Search-form"   role="form" style="display: block;"  enctype="multipart/form-data" >
+                <label>CategoryId :</label>
+                <p:inputText styleClass="form-control" id="idsearch" value="#{EditProduct.searchId}"  required="true" requiredMessage="Please enter Category ID">
+
+                </p:inputText>
+                <h:message for="idedit" style="color:red" />
+                <br/>
+                <div class="col-sm-6 col-sm-offset-5">
+                    <h:commandButton styleClass="btn btn-primary" value="Search" action="#{EditProduct.Search}"
+                                     ajax="true">
+                        <f:ajax execute="Search-form" render="EditProduct-form"  ></f:ajax>
+                    </h:commandButton>
+                </div>
+            </h:form>
+            <br/>
+            <hr/>
+        <h:form id="EditProduct-form"   role="form" style="display: block;" styleClass="form-horizontal login" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Product ID :</label>
+                <p:inputText styleClass="form-control" id="idedit" value="#{EditProduct.id}"  required="true" requiredMessage="Please enter Product's id">
+
+                </p:inputText>
+                <h:message for="id" style="color:red" />
+            </div>
+            <div class="form-group">
+                <label>Name :</label>
+                <p:inputText styleClass="form-control" id="NameEdit" value="#{EditProduct.name}"  required="true" requiredMessage="Please enter Product's name">
+
+                </p:inputText>
+                <h:message for="name" style="color:red" />
+            </div>
+            <div class="form-group">
+                <label>Price :</label>
+                <p:inputText styleClass="form-control" id="PriceEdit" value="#{EditProduct.price}"  required="true" requiredMessage="Please enter Product's price">
+
+                </p:inputText>
+                <h:message for="price" style="color:red" />
+            </div>
+            <div class="form-group">
+                <label>Stock :</label>
+                <p:inputText styleClass="form-control" id="StockEdit" value="#{EditProduct.stock}"  required="true" requiredMessage="Please enter Product's stock">
+
+                </p:inputText>
+                <h:message for="stock" style="color:red" />
+            </div>
+            <div class="form-group">
+
+                <p:outputLabel for="categoryEdit" value="Category: " />
+                <h:selectOneMenu id="categoryEdit" value="#{EditProduct.categorySelection}" effect="fold" editable="true">
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItems value="#{EditProduct.categories}" />
+                </h:selectOneMenu>
+
+            </div>
+            <div class="form-group">
+
+                <p:outputLabel for="brandEdit" value="Brand: " />
+                <h:selectOneMenu id="brandEdit" value="#{EditProduct.brandSelection}" effect="fold" editable="true">
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItems value="#{EditProduct.brands}" />
+                </h:selectOneMenu>
+
+            </div>
+            <div class="form-group">
+                <label>Description :</label>
+                <p:inputTextarea rows="6" cols="33"  styleClass="form-control" id="DescEdit" value="#{EditProduct.description}"  required="true" requiredMessage="Please enter Product's Description">
+
+                </p:inputTextarea>
+                <h:message for="desc" style="color:red" />
+            </div>
+            <div class="form-group">
+                <label>off percent :</label>
+                <p:inputText styleClass="form-control" id="offEdit" value="#{EditProduct.off}"  required="true" requiredMessage="Please enter Product's off percent">
+
+                </p:inputText>
+                <h:message for="off" style="color:red" />
+            </div>
+
+            <div class="form-group">
+                <label>Image :</label>
+                <h:inputFile value="#{EditProduct.imageUpload}">
+                </h:inputFile>
+
+            </div>
+            <div class="form-group">
+                <label>Color :</label>
+                <p:inputText styleClass="form-control" id="ColorEdit" value="#{EditProduct.color}"  required="true" requiredMessage="Please enter Product's color">
+
+                </p:inputText>
+                <h:message for="color" style="color:red" />
+            </div>
+            <div class="form-group">
+                <label>State :</label>
+                <p:inputText styleClass="form-control" id="StateEdit" value="#{EditProduct.state}"  required="true" requiredMessage="Please enter Product's state">
+
+                </p:inputText>
+                <h:message for="state" style="color:red" />
+            </div>
+            <div class="col-sm-6 col-sm-offset-5">
+                <h:commandButton styleClass="btn btn-success" value="submit" action="#{EditProduct.EditProducts}"
+                >
+                    <f:ajax execute="EditProduct-form" render="EditProduct-form"></f:ajax>
+                </h:commandButton>
+            </div>
+        </h:form>
+        </div>
+                </div>
+            </div>
+    </div>
+        </div>
+</div>
+    <div class="panel-footer navbar-fixed-bottom">
+        <div class="container">
+
+            <div class="text-center">&copy; Copyright Online Shopping 2017</div>
+        </div>
+    </div>
+
+</h:body>
+
+</html>

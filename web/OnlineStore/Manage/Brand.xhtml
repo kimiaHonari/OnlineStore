@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
+<h:head>
+    <title>Management</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="bootstrap-theme.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="font-awesome.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="bootstrap-social.css"></h:outputStylesheet>
+
+    <h:outputScript library="javascript" name="jquery-3.1.0.min.js"></h:outputScript>
+    <h:outputScript library="javascript" name="bootstrap.min.js"></h:outputScript>
+    <h:outputStylesheet library="css"   name="mystyles.css"></h:outputStylesheet>
+
+
+</h:head>
+<h:body>
+    <h:form>
+        <div class="navbar navbar-default navbar-fixed-top" >
+            <div class="container">
+                <div class="navbar-header">
+                    <h:button type="button" class="navbar-toggle" data-toggle="collapse"
+                              data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span>
+                    </h:button>
+                    <a class="navbar-brand" href="#">Management</a>
+                </div>
+                <div class="collapse navbar-collapse">
+
+                    <ul class="nav navbar-nav">
+                        <li ><a href="/OnlineStore/Home.xhtml">Online shopping</a></li>
+                        <li ><a href="/OnlineStore/Manage/Product.xhtml">Product</a></li>
+                        <li ><a href="/OnlineStore/Manage/Category.xhtml">Category</a></li>
+                        <li class="active"><a href="#">Brand</a></li>
+                        <li ><a href="/OnlineStore/Manage/Repository.xhtml">Repository</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+
+                        <li>
+                            <h:commandLink value="Logout" action="#{LoginManageBean.logout}"   rendered="#{LoginManageBean.loggedIn}">
+                            </h:commandLink>
+                        </li>
+
+                    </ul>
+
+
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </h:form>
+    <div id="main-content" class="container" >
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h:form id="messages">
+            <p:messages id="m1" showDetail="true" autoUpdate="true" closable="true" />
+                </h:form>
+        <div class="row">
+            <div class="col-md-5 ">
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h2 style="color: green;" class="col-sm-offset-3">Add Brand</h2></div>
+                    <div class="panel-body">
+
+
+                        <div style="padding: 5px; ">
+                            <h:form id="AddBrand-form"   role="form" style="display: block;" styleClass="form-horizontal " enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label>Brand Id :</label>
+                                    <p:inputText styleClass="form-control" id="id" value="#{AddBrand.brandNumber}"  required="true" requiredMessage="Please enter Category ID">
+
+                                    </p:inputText>
+                                    <h:message for="id" style="color:red" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Brand Name :</label>
+                                    <p:inputText styleClass="form-control" id="name" value="#{AddBrand.name}"  required="true" requiredMessage="Please enter Category Name">
+
+                                    </p:inputText>
+                                    <h:message for="name" style="color:red" />
+                                </div>
+
+                                <div class="col-sm-6 col-sm-offset-5">
+                                    <h:commandButton styleClass="btn btn-primary" value="Add Brand" action="#{AddBrand.AddBrands}"
+                                                     ajax="true">
+                                        <f:ajax execute="AddBrand-form" render="AddBrand-form"  ></f:ajax>
+                                    </h:commandButton>
+                                </div>
+
+
+                            </h:form>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5 ">
+
+
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h2 style="color: green;" class="col-sm-offset-3">Edit Brand</h2></div>
+                    <div class="panel-body">
+
+
+                        <div style="padding: 7px; ">
+                            <h:form id="Search-form"   role="form" style="display: block;" >
+
+                                <label>Brand Id :</label>
+                                <p:inputText styleClass="form-control" id="idsearch" value="#{EditBrand.brandNumberSearch}" enctype="multipart/form-data" required="true" requiredMessage="Please enter Category ID">
+
+                                </p:inputText>
+                                <h:message for="idedit" style="color:red" />
+                                <br/>
+                                <div class="col-sm-6 col-sm-offset-5">
+                                    <h:commandButton styleClass="btn btn-primary" value="Search" action="#{EditBrand.Search}"
+                                    update="growl">
+                                        <f:ajax execute="Search-form" render="EditBrand-form"  ></f:ajax>
+                                    </h:commandButton>
+                                </div>
+                            </h:form>
+                            <br/>
+                            <hr/>
+                            <h:form id="EditBrand-form"   role="form" style="display: block;" styleClass="form-horizontal " enctype="multipart/form-data">
+
+                                <div class="form-group">
+                                    <label>Brand Id :</label>
+                                    <p:inputText styleClass="form-control" id="idedit" value="#{EditBrand.brandNumber}"  required="true" requiredMessage="Please enter Category ID">
+
+                                    </p:inputText>
+                                    <h:message for="idedit" style="color:red" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Brand Name :</label>
+                                    <p:inputText styleClass="form-control" id="nameedit" value="#{EditBrand.name}"  required="true" requiredMessage="Please enter Category Name">
+
+                                    </p:inputText>
+                                    <h:message for="nameedit" style="color:red" />
+                                </div>
+
+                                <div class="col-sm-6 col-sm-offset-5">
+                                    <h:commandButton styleClass="btn btn-primary" value="Edit Brand" action="#{EditBrand.EditBrands}"
+                                                     ajax="true">
+                                        <f:ajax execute="EditBrand-form" render="EditBrand-form"  ></f:ajax>
+                                    </h:commandButton>
+                                </div>
+
+
+                            </h:form>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="panel-footer navbar-fixed-bottom">
+        <div class="container">
+
+            <div class="text-center">&copy; Copyright Online Shopping 2017</div>
+        </div>
+    </div>
+
+</h:body>
+
+</html>
