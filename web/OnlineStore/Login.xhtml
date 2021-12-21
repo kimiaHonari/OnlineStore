@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
+<h:head>
+    <title>Online Shopping</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Ristorante Con Fusion</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="bootstrap-theme.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="font-awesome.min.css"></h:outputStylesheet>
+    <h:outputStylesheet library="css" name="bootstrap-social.css"></h:outputStylesheet>
+
+    <h:outputScript library="javascript" name="jquery-3.1.0.min.js"></h:outputScript>
+    <h:outputScript library="javascript" name="bootstrap.min.js"></h:outputScript>
+
+
+
+</h:head>
+<h:body>
+    <h:form styleClass="container">
+        <div class="navbar navbar-default navbar-fixed-top " >
+            <div class="container">
+                <div class="navbar-header">
+                    <h:button type="button" class="navbar-toggle" data-toggle="collapse"
+                              data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span>
+                    </h:button>
+                    <a class="navbar-brand" href="#">Online Shop</a>
+                </div>
+                <div class="collapse navbar-collapse">
+
+                    <ul class="nav navbar-nav">
+                        <li ><a href="/OnlineStore/Home.xhtml">Home</a></li>
+                        <li><a href="/OnlineStore/Product.xhtml">Product</a></li>
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ><a href="/OnlineStore/MyCart.xhtml">Your cart </a></li>
+
+                        <li>
+                            <h:commandLink value="Logout" action="#{LoginManageBean.logout}"   rendered="#{LoginManageBean.loggedIn}">
+                            </h:commandLink>
+                        </li>
+                        <li class="active">
+                            <h:link value="Login/Register" action="#"   rendered="#{LoginManageBean.loggedOut}">
+                            </h:link>
+                        </li>
+                    </ul>
+
+
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </h:form>
+
+    <div id="Login-Content" class="container" >
+     <br/>
+        <br/>
+        <br/>
+        <br/>
+        <h:form id="messages">
+            <p:messages id="m1" showDetail="true" autoUpdate="true" closable="true" />
+        </h:form>
+    <div class="row">
+               <div class="col-md-5 ">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2 style="color: green;" class="col-sm-offset-5">Login</h2></div>
+        <div class="panel-body">
+
+
+            <div style="padding: 5px;">
+
+                        <h:form id="login-form"   role="form" style="display: block;" enctype="multipart/form-data" styleClass="form-horizontal login" >
+                            <div class="form-group">
+                            <label>Username :</label>
+                            <p:inputText styleClass="form-control" id="email" value="#{LoginManageBean.user}"  required="true" requiredMessage="Please enter your Username">
+
+                            </p:inputText>
+                            <p:watermark for="email" value="Email Address *" />
+                            <h:message for="email" style="color:red" />
+                        </div>
+                            <div class="form-group">
+                                <label>password :</label>
+                            <p:password styleClass="form-control" id="password" value="#{LoginManageBean.pwd}"  required="true" requiredMessage="Please enter your password">
+
+                            </p:password>
+                                <h:message for="password" style="color:red" />
+                            </div>
+                            <div class="form-group">
+                            <div class="row">
+                            <div class="col-sm-6 col-sm-offset-5">
+                            <h:commandButton styleClass="btn btn-success" value="Login" action="#{LoginManageBean.validateUsernamePassword}"
+                            ajax="flase">
+                                <f:ajax execute="login-form" render="login-form"  ></f:ajax>
+                            </h:commandButton>
+                            </div>
+                            </div>
+                            </div>
+                        </h:form>
+</div>
+            </div>
+        </div>
+                    </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5 ">
+
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2 style="color: blue;" class="col-sm-offset-5">Register</h2></div>
+                <div class="panel-body">
+
+
+                    <div style="padding: 5px;">
+                  <h:form id="Register-form"   role="form" style="display: block;" styleClass="form-horizontal login"  enctype="multipart/form-data">
+                 <div class="form-group">
+                    <label>First Name :</label>
+                    <p:inputText styleClass="form-control" id="FirstName" value="#{Register.firstName}"  required="true" requiredMessage="Please enter your FirstName">
+
+                    </p:inputText>
+
+                    <h:message for="FirstName" style="color:red" />
+                </div>
+                <div class="form-group">
+                    <label>Last Name :</label>
+                    <p:inputText styleClass="form-control" id="LastName" value="#{Register.lastName}"  required="true" requiredMessage="Please enter your LastName">
+
+                    </p:inputText>
+                    <h:message for="LastName" style="color:red" />
+                </div>
+
+                <div class="form-group">
+                    <label>Email address :</label>
+                    <p:inputText styleClass="form-control" id="Email" value="#{Register.email}"  required="true" requiredMessage="Please enter your Email address">
+
+                    </p:inputText>
+                    <p:watermark for="Email" value="Email Address *" />
+                    <h:message for="Email" style="color:red" />
+                </div>
+                <div class="form-group">
+                    <label>Password :</label>
+                <p:password styleClass="form-control" id="pw" value="#{Register.password}"  required="true" requiredMessage="Please enter your password">
+
+                </p:password>
+                    <h:message for="pw" style="color:red" />
+            </div>
+                <div class="form-group">
+                    <label>Confirm Password :</label>
+                    <p:password styleClass="form-control" id="pw2" value="#{Register.confirmPassword}"  required="true"  requiredMessage="Please Confirm your password">
+
+                    </p:password>
+                    <h:message for="pw2" style="color:red" />
+                </div>
+
+
+                    <div class="form-group">
+                        <label>City :</label>
+                    <p:inputText styleClass="form-control" id="city" value="#{Register.city}"  required="true" requiredMessage="Please enter your city">
+                    </p:inputText>
+                        <h:message for="city" style="color:red" />
+                    </div>
+                    <div class="form-group ">
+                        <label>Country :</label>
+                    <p:inputText styleClass="form-control " id="country" value="#{Register.country}"  required="true" requiredMessage="Please enter your country">
+
+                    </p:inputText>
+                        <h:message for="country" style="color:red" />
+                    </div>
+
+
+                <div class="form-group">
+                    <label>address :</label>
+                    <p:inputText styleClass="form-control" id="address" value="#{Register.address}"  required="true" requiredMessage="Please enter your address">
+
+                    </p:inputText>
+                    <h:message for="address" style="color:red" />
+                </div>
+                <div class="form-group">
+                    <label>Mobile Number :</label>
+                    <p:inputText styleClass="form-control" id="MobileNumber" value="#{Register.mobileNumber}"  required="true" requiredMessage="Please enter your MobileNumber">
+
+                    </p:inputText>
+                    <h:message for="MobileNumber" style="color:red" />
+                </div>
+                <div class="form-group">
+                    <label>Telephone Number :</label>
+                    <p:inputText styleClass="form-control" id="TelephoneNumber" value="#{Register.telephoneNumber}"  required="true" requiredMessage="Please enter your TelephoneNumber">
+
+                    </p:inputText>
+                    <h:message for="TelephoneNumber" style="color:red" />
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-5">
+                            <h:commandButton styleClass="btn btn-primary" value="Register" action="#{Register.register}"
+                                             ajax="flase">
+                                <f:ajax execute="Register-form" render="Register-form"  ></f:ajax>
+                            </h:commandButton>
+                        </div>
+                    </div>
+                      </div>
+
+            </h:form>
+          </div>
+                </div>
+            </div>
+
+        </div>
+                </div>
+
+
+            </div>
+ <br/>
+    <br/>
+
+    <div class="panel-footer navbar-fixed-bottom">
+        <div class="container">
+
+            <div class="text-center">&copy; Copyright Online Shopping 2017</div>
+        </div>
+    </div>
+
+</h:body>
+</html>
