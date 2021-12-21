@@ -1,2 +1,2 @@
 
-Online web application - using JSF-Hibernate
+OnlineStore web application - using JSF-Hibernate
