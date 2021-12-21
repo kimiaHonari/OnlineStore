@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <context:component-scan base-package="ir"/>
+    <context:annotation-config/>
+    <context:spring-configured/>
+
+       <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+              <property name="driverClass" value="org.postgresql.Driver"/>
+              <property name="jdbcUrl"
+                        value="jdbc:postgresql://localhost:5433/finalproject?useUnicode=true&amp;characterEncoding=UTF-8"/>
+              <property name="user" value="postgres"/>
+              <property name="password" value="123"/>
+              <property name="maxPoolSize" value="2"/>
+              <property name="minPoolSize" value="1"/>
+       </bean>
+
+       <bean id="sessionFactory"
+             class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+              <property name="dataSource" ref="dataSource"/>
+              <property name="annotatedPackages">
+                   <list>
+                          <value>ir.onlinestore.model</value>
+                       <value>ir.onlinestore.dao</value>
+                   </list>
+              </property>
+              <property name="hibernateProperties">
+                     <props>
+                            <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+
+                            <prop key="hibernate.connection.url">jdbc:postgresql://localhost:5433/finalproject?useUnicode=true&amp;characterEncoding=UTF-8</prop>
+                            <!--<prop key="hibernate.connection.url"> postgres://iswniqhinjwscy:NbiI_-_wP4bg1OsW5jt4L_5qsu@ec2-54-243-54-21.compute-1.amazonaws.com:5432/dashb2k78sq61p</prop>-->
+                            <prop key="hibernate.connection.driver_class">org.postgresql.Driver</prop>
+                            <!--<prop key="hibernate.connection.driver_class">org.postgresql.Driver</prop>-->
+                            <prop key="hibernate.id.new_generator_mappings">false</prop>
+                            <prop key="hibernate.connection.CharSet">utf8</prop>
+                            <prop key="hibernate.connection.characterEncoding">utf8</prop>
+                            <prop key="hibernate.connection.useUnicode">true</prop>
+                            <prop key="hibernate.hbm2ddl.auto">update</prop>
+
+                         <prop key="hibernate.show_sql">true</prop>
+                     </props>
+
+              </property>
+              <property name="packagesToScan" value="ir.onlinestore.model"/>
+       </bean>
+       <tx:annotation-driven transaction-manager="txManager"/>
+       <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+              <property name="sessionFactory" ref="sessionFactory"/>
+       </bean>
+</beans>
